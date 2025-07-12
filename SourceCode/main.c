@@ -36,14 +36,12 @@ int main(void)
 	struct Map routeMap = addRoute(&baseMap, &truckFleet[0].route);//map with buildings AND all routes
 	routeMap = addRoute(&routeMap, &truckFleet[1].route);
 	routeMap = addRoute(&routeMap, &truckFleet[2].route);
-
 	printMap(&routeMap, 1, 1);//print out the route map in full
 
 	//make a route from origin (1, A) to a non-building point like (9, F) with shortestPath, and print it out
-	//there is diagonal movement, due to all eight directional movements enabled in getPossibleMoves
+	//there is diagonal movement due to all eight directional movements enabled in getPossibleMoves
 	struct Point a = { 1 - 1, 'A' - 'A' };
 	struct Point b = { 9 - 1, 'F' - 'A' };
-
 	struct Route testRoute = shortestPath(&routeMap, a, b);
 
 	printf("\nRoute from (1, A) to (9, F)\n");
@@ -52,10 +50,17 @@ int main(void)
 		printf("%d %c\n", (testRoute.points[i].row + 1), (testRoute.points[i].col + 'A'));
 	}
 
-	//cannot use shortestPath to a building point like (3, B) - either crashes or infinitely loops
+	/*Show the map with the test route, displayed as the letter 'P'.
+	Overlap of test route and truck route shows a "null" character.
+	*/
+	routeMap = addRoute(&routeMap, &testRoute);	
+	printMap(&routeMap, 1, 1);//print out the route map in full
+
+	/*cannot use shortestPath to a building point like(3, B) - either crashes or infinitely loops
 	//b.row = 3 - 1;
 	//b.col = 'B' - 'A';
 	//testRoute = shortestPath(&routeMap, a, b);
+	*/
 
 	return 0;
 }
