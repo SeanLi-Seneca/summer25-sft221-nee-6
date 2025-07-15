@@ -36,6 +36,7 @@ int main(void)
 	struct Map routeMap = addRoute(&baseMap, &truckFleet[0].route);//map with buildings AND all routes
 	routeMap = addRoute(&routeMap, &truckFleet[1].route);
 	routeMap = addRoute(&routeMap, &truckFleet[2].route);
+	printf("Base map\n");
 	printMap(&routeMap, 1, 1);//print out the route map in full
 
 	//make a route from origin (1, A) to a non-building point like (9, F) with shortestPath, and print it out
@@ -53,8 +54,26 @@ int main(void)
 	/*Show the map with the test route, displayed as the letter 'P'.
 	Overlap of test route and truck route shows a "null" character.
 	*/
+	putchar('\n');
 	routeMap = addRoute(&routeMap, &testRoute);	
 	printMap(&routeMap, 1, 1);//print out the route map in full
+
+	struct Point c = { 12 - 1, 'A' - 'A' };
+	struct Route testRoute2 = getPossibleMoves(&routeMap, c, c);
+	printf("\nSurrounding non-building points of the building point (12, A)\n");
+	for (int i = 0; i < testRoute2.numPoints; i++)
+	{
+		printf("%d %c\n", (testRoute2.points[i].row + 1), (testRoute2.points[i].col + 'A'));
+	}
+
+	struct Point d = { 23 - 1, 'C' - 'A' };
+	struct Route testRoute3 = getPossibleMoves(&routeMap, d, d);
+	printf("\nSurrounding non-building points of the inaccessible building point (23, C)");
+	printf("\nThere are none\n");
+	for (int i = 0; i < testRoute3.numPoints; i++)
+	{
+		printf("%d %c\n", (testRoute3.points[i].row + 1), (testRoute3.points[i].col + 'A'));
+	}
 
 	/*cannot use shortestPath to a building point like(3, B) - either crashes or infinitely loops
 	//b.row = 3 - 1;
