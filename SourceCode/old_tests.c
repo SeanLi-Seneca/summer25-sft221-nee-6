@@ -4,7 +4,7 @@
 #include "mapping.h"
 #include "shipment.h"
 
-void old()
+void old_tests()
 {
 	/*original code
 	//struct Map baseMap = populateMap();
@@ -93,6 +93,6 @@ void old()
 	int w;
 	double s;
 	struct Point p;
-	parseInput(&w, &s, &p, "1000 2 20Y");
+	parseInput(&w, &s, &p, "1000 0.5 20Y");
 	return 0;
 }

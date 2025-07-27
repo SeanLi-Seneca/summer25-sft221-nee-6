@@ -46,7 +46,11 @@ void parseInput(int* weight, double* volume, struct Point* p, const char* input)
 {
     int tempRow = -1;
     char tempCol = '0';
-    sscanf(input, "%d %lf %d%c", weight, volume, &tempRow, &tempCol);
+    int check = sscanf(input, "%d %lf %d%c", weight, volume, &tempRow, &tempCol);
+    if (check != 4)
+    {
+        return;
+    }
     p->row = tempRow - 1;
     p->col = tempCol - 'A';
 }

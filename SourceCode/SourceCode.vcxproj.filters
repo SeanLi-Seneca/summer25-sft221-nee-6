@@ -24,6 +24,9 @@
     <ClCompile Include="shipment.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="old_tests.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mapping.h">
