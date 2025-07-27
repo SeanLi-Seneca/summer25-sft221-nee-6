@@ -125,6 +125,7 @@
   <ItemGroup>
     <ClCompile Include="main.c" />
     <ClCompile Include="mapping.c" />
+    <ClCompile Include="shipment.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mapping.h" />

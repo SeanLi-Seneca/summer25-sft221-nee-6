@@ -147,6 +147,7 @@ struct Route shortestPath(const struct Map* map, const struct Point start, const
 
 /**
 * Calculate all adjacent squares to a given point so that the squares do not overlap a building and do not include the backpath.
+* Diagonal points have been disabled
 * @param map - the map showing the location of buildings.
 * @param p1 - the point to calculate possible moves for
 * @param backpath - the previous point we visited on the path we travelled so we will exclude travelling backwards.

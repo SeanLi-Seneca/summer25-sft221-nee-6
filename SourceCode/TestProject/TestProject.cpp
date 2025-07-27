@@ -34,7 +34,7 @@ namespace TestProject
 		{
 			struct Point b = { 6 - 1, 'C' - 'A' };
 			struct Route testRoute = shortestPath(&baseMap, a, b);
-			Assert::IsTrue(testRoute.numPoints == 1);
+			Assert::IsTrue(testRoute.numPoints == 2);
 		}
 		TEST_METHOD(Corner)
 		{
@@ -80,13 +80,13 @@ namespace TestProject
 		{
 			Point a = { 22 - 1, 'B' - 'A' };
 			struct Route testSurround = getPossibleMoves(&baseMap, a, a);
-			Assert::IsTrue(testSurround.numPoints == 5);
+			Assert::IsTrue(testSurround.numPoints == 2);
 		}
 		TEST_METHOD(LoneBuilding)
 		{
 			Point a = { 3 - 1, 'K' - 'A' };
 			struct Route testSurround = getPossibleMoves(&baseMap, a, a);
-			Assert::IsTrue(testSurround.numPoints == 8);
+			Assert::IsTrue(testSurround.numPoints == 4);
 		}
 	};
 }

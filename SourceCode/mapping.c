@@ -251,16 +251,16 @@ struct Route getPossibleMoves(const struct Map* map, const struct Point p1, cons
 	if (p1.row > 0 )
 	{
 		if(map->squares[p1.row - 1][p1.col] != 1) addPointToRouteIfNot(&result, p1.row - 1, p1.col, backpath);	// square above
-		if (p1.col > 0 && map->squares[p1.row - 1][p1.col-1] != 1) addPointToRouteIfNot(&result, p1.row - 1, p1.col-1, backpath);	// top left
-		if (p1.col < (map->numCols-1) && map->squares[p1.row - 1][p1.col + 1] != 1) addPointToRouteIfNot(&result, p1.row - 1, p1.col + 1, backpath);	// top right
+		//if (p1.col > 0 && map->squares[p1.row - 1][p1.col-1] != 1) addPointToRouteIfNot(&result, p1.row - 1, p1.col-1, backpath);	// top left
+		//if (p1.col < (map->numCols-1) && map->squares[p1.row - 1][p1.col + 1] != 1) addPointToRouteIfNot(&result, p1.row - 1, p1.col + 1, backpath);	// top right
 	}
 	if(p1.col > 0 && map->squares[p1.row][p1.col - 1] != 1)addPointToRouteIfNot(&result, p1.row, p1.col - 1, backpath);	// left
 	if (p1.col < (map->numCols - 1) && map->squares[p1.row][p1.col + 1] != 1)addPointToRouteIfNot(&result, p1.row, p1.col + 1, backpath);	// right
 	if (p1.row < (map->numRows - 1))
 	{
 		if (map->squares[p1.row + 1][p1.col] != 1) addPointToRouteIfNot(&result, p1.row + 1, p1.col, backpath);	// square below
-		if (p1.col > 0 && map->squares[p1.row + 1][p1.col - 1] != 1) addPointToRouteIfNot(&result, p1.row + 1, p1.col - 1, backpath);	// bot left
-		if (p1.col < (map->numCols - 1) && map->squares[p1.row + 1][p1.col + 1] != 1) addPointToRouteIfNot(&result, p1.row + 1, p1.col + 1, backpath);	// top right
+		//if (p1.col > 0 && map->squares[p1.row + 1][p1.col - 1] != 1) addPointToRouteIfNot(&result, p1.row + 1, p1.col - 1, backpath);	// bot left
+		//if (p1.col < (map->numCols - 1) && map->squares[p1.row + 1][p1.col + 1] != 1) addPointToRouteIfNot(&result, p1.row + 1, p1.col + 1, backpath);	// top right
 	}
 
 	return result;
