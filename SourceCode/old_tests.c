@@ -39,11 +39,11 @@ void old_tests()
 	printf("Base map\n");
 	printMap(&routeMap, 1, 1);//print out the route map in full
 
-	//make a route from origin (1, A) to a non-building point like (9, F) with shortestPath, and print it out
+	//make a route from origin (1, A) to a non-building point like (9, F) with shortestPath_Enhanced, and print it out
 	//there is no more diagonal movement due to the disabling of diagonal points in getPossibleMoves
 	struct Point a = { 1 - 1, 'A' - 'A' };
 	struct Point b = { 9 - 1, 'F' - 'A' };
-	struct Route testRoute = shortestPath(&routeMap, a, b);
+	struct Route testRoute = shortestPath_Enhanced(&routeMap, a, b);
 
 	printf("\nRoute from (1, A) to (9, F)\n");
 	for (int i = 0; i < testRoute.numPoints; i++)
@@ -77,16 +77,16 @@ void old_tests()
 
 	//testing maximum movement: from origin to bottom right corner
 	struct Point f = { 1 - 1, 'A' - 'A' };
-	struct Route testRoute4 = shortestPath(&routeMap, a, f);
+	struct Route testRoute4 = shortestPath_Enhanced(&routeMap, a, f);
 	for (int i = 0; i < testRoute4.numPoints; i++)
 	{
 		printf("%d %c\n", (testRoute4.points[i].row + 1), (testRoute4.points[i].col + 'A'));
 	}
 
-	/*DEPRECATED: cannot use shortestPath to a building point like(3, B) - either crashes or infinitely loops
+	/*DEPRECATED: cannot use shortestPath_Enhanced to a building point like(3, B) - either crashes or infinitely loops
 	//b.row = 3 - 1;
 	//b.col = 'B' - 'A';
-	//testRoute = shortestPath(&routeMap, a, b);
+	//testRoute = shortestPath_Enhanced(&routeMap, a, b);
 	*/
 
 	//testing parseInput
@@ -94,5 +94,19 @@ void old_tests()
 	double s;
 	struct Point p;
 	parseInput(&w, &s, &p, "1000 0.5 20Y");
+
+	printf("Going to: %d %c\n", p.row + 1, p.col + 'A');
+	int bpi = getClosestPoint(&truckFleet[0].route, p);
+	int gpi = getClosestPoint(&truckFleet[1].route, p);
+	int ypi = getClosestPoint(&truckFleet[2].route, p);
+	struct Point bp = truckFleet[0].route.points[bpi];
+	struct Point gp = truckFleet[1].route.points[gpi];
+	struct Point yp = truckFleet[2].route.points[ypi];
+	printf("Blue closest: %d %c\n", bp.row + 1, bp.col + 'A');
+	printf("Green closest: %d %c\n", gp.row + 1, gp.col + 'A');
+	printf("Yellow closest: %d %c\n", yp.row + 1, yp.col + 'A');
+	struct Route bro = shortestPath_Enhanced(&baseMap, bp, p);
+	struct Route gro = shortestPath_Enhanced(&baseMap, gp, p);
+	struct Route yro = shortestPath_Enhanced(&baseMap, yp, p);
 	return 0;
 }

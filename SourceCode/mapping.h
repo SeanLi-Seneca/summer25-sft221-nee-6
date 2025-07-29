@@ -8,7 +8,9 @@
 #define BLUE 2
 #define GREEN 4
 #define YELLOW 8
-#define DIVERSION 16
+#define DIVERSION 
+
+#define DEBUG_PRINT_SHORTESTPATH 0
 
 /**
 * A map is a 2D raster representation of a map with contents of the map encoded as numeric values.
@@ -30,7 +32,7 @@ struct Point
 };
 
 /**
-* A route is a collection of points that are adjacent to one another and constitute a path from the 
+* A route is a collection of points that are adjacent to one another and constitute a path from the
 * first point on the path to the last.
 */
 struct Route
@@ -143,11 +145,10 @@ double distance(const struct Point* p1, const struct Point* p2);
 * @returns - the shortest path from start to dest. If there is no path, then a Route of zero length is returned.If start
 * and dest are the same point, it also returns a Route of zero length.
 */
-struct Route shortestPath(const struct Map* map, const struct Point start, const struct Point dest);
+struct Route shortestPath_Enhanced(const struct Map* map, const struct Point start, const struct Point dest);
 
 /**
-* Calculate all adjacent squares to a given point so that the squares do not overlap a building and do not include the backpath.
-* Diagonal points have been disabled
+* Calculate all adjacent squares to a given point so that the squares do not overpal a building and do not include the backpath.
 * @param map - the map showing the location of buildings.
 * @param p1 - the point to calculate possible moves for
 * @param backpath - the previous point we visited on the path we travelled so we will exclude travelling backwards.
@@ -164,7 +165,7 @@ struct Route getPossibleMoves(const struct Map* map, const struct Point p1, cons
 int eqPt(const struct Point p1, const struct Point p2);
 
 /**
-* Calculates the Euclidean distance from every point in a route to a single point and returns the 
+* Calculates the Euclidian distance from every point in a route to a single point and returns the
 * index of the point in the route which is closest to the point.
 * @param route - the route to use to find the closest point
 * @param pt - the point to to find the member of the route which is closest to this point

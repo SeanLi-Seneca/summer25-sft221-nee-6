@@ -131,6 +131,7 @@
   <ItemGroup>
     <ClInclude Include="mapping.h" />
     <ClInclude Include="shipment.h" />
+    <ClInclude Include="shipment_old.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
