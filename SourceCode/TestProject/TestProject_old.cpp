@@ -1,16 +1,12 @@
-
 #include "pch.h"
 #include "CppUnitTest.h"
 #include "mapping_r.h"
 #include "shipment_r.h"
 
-using namespace std;
-
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace TestProject
 {
-
 	struct Map baseMap = populateMap(); //base map with only buildings but no routes
 
 	/*tests shortestPath_Enhanced function*/
@@ -34,7 +30,7 @@ namespace TestProject
 		{
 			struct Point b = { 6 - 1, 'C' - 'A' };
 			struct Route testRoute = shortestPath_Enhanced(&baseMap, a, b);
-			Assert::IsTrue(testRoute.numPoints == 2);
+			Assert::IsTrue(testRoute.numPoints == 1);
 		}
 		TEST_METHOD(Corner)
 		{

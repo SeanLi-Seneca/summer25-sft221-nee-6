@@ -27,7 +27,7 @@ int main(void)
 
 	int weight = -1;
 	double volume = -1;
-	struct Point p = { '-','-' };
+	struct Point inputPoint = { '-','-' };
 
 	char input[20];
 
@@ -40,7 +40,7 @@ int main(void)
 	int capableTruckFound = 0;
 
 	puts("Seneca Polytechnic Deliveries:");
-	puts("=================");
+	puts("==============================");
 	do
 	{
 		puts("--------------");
@@ -49,7 +49,7 @@ int main(void)
 		isExit = isExiting(input);
 		if (!isExit)
 		{
-			checkInput = parseInput(&weight, &volume, &p, input);
+			checkInput = parseInput(&weight, &volume, &inputPoint, input);
 
 			if (checkInput != 4)
 				puts("Invalid input format");
@@ -57,11 +57,11 @@ int main(void)
 				puts("Invalid weight (must be 1-5000)");
 			else if (!validVolume(volume))
 				puts("Invalid volume (must be 0.5, 2, or 5)");
-			else if (!validDeliverableBuilding(&map, p))
+			else if (!validDeliverableBuilding(&map, inputPoint))
 				puts("Invalid destination (refer to map)");
 			else
 			{
-				s = createShipment(weight, volume, p);
+				s = createShipment(weight, volume, inputPoint);
 				capableTruckFound = canCarryShipment(truckFleet, canCarry, 3, s);
 				shortestDistance = shortestPossibleDiversionDistance(truckFleet, canCarry, 3, &map, s);
 				if (shortestDistance < MAX_ROUTE && capableTruckFound)
@@ -92,18 +92,22 @@ int main(void)
 						printf("%s weight: %d vol: %.2lf\n", temp.name, temp.currentWeight, temp.currentVolume);
 					}
 				}
+				else if (!capableTruckFound)
+				{
+					printf("No more room on trucks\n");
+				}
 				else if (shortestDistance >= MAX_ROUTE)
 				{
 					printf("Destination cannot be reached by pathfinding\n");
 				}
 				else
 				{
-					printf("No more room on trucks\n");
+					printf("Unknown issue, cannot make this delivery\n");
 				}
 			}
 		}
 	} while (!isExit);
-	puts("Thanks for shipping with Seneca Polytechnic!");
+	puts("\n-----Thanks for shipping with Seneca Polytechnic!-----");
 	return 0;
 
 }
