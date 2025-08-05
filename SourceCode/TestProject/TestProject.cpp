@@ -17,14 +17,14 @@ namespace TestProject
             int weight = 0;
             double volume = 0.0;
             struct Point p = { 0 };
-            int result = parseInput(&weight, &volume, &p, "100 0.5 A2");
+            int result = parseInput(&weight, &volume, &p, "100 0.5 7I");
             Assert::AreEqual(4, result);
             Assert::AreEqual(100, weight);
             Assert::AreEqual(0.5, volume, 0.001);
 
             
-            Assert::AreEqual('A', p.col);
-            /*Assert::AreEqual(2, p.row);  */
+            Assert::AreEqual('I' - 'A', (int)p.col);
+            Assert::AreEqual(7 - 1, (int)p.row);
         }
 
         TEST_METHOD(ParseInput_InvalidFormat)
@@ -94,14 +94,14 @@ namespace TestProject
         TEST_METHOD(ValidDeliverableBuilding_ValidPoint)
         {
             struct Map map = populateMap();
-            struct Point p = { 'A', 0 }; 
+            struct Point p = { 12 - 1, 'S' - 'A'};
             Assert::IsTrue(validDeliverableBuilding(&map, p));
         }
 
         TEST_METHOD(ValidDeliverableBuilding_InvalidPoint)
         {
             struct Map map = populateMap();
-            struct Point p = { 'Z', 99 };
+            struct Point p = { 99, 'Z'};
             Assert::IsFalse(validDeliverableBuilding(&map, p));
         }
 
@@ -111,7 +111,7 @@ namespace TestProject
             trucks[0].currentWeight = 100;
             trucks[0].currentVolume = 1.0;
 
-            struct Shipment s = { 50, 0.5, {'A', 0} };
+            struct Shipment s = { 50, 0.5, {1, 'A'}};
 
             int canCarry[1] = { 0 };
             int result = canCarryShipment(trucks, canCarry, 1, s);
@@ -126,7 +126,7 @@ namespace TestProject
             trucks[0].currentWeight = 10000;  
             trucks[0].currentVolume = 50.0;   
 
-            struct Shipment s = { 50, 0.5, {'A', 0} };
+            struct Shipment s = { 50, 0.5, {1, 'A'}};
 
             int canCarry[1] = { 0 };
             int result = canCarryShipment(trucks, canCarry, 1, s);
@@ -136,11 +136,11 @@ namespace TestProject
 
         TEST_METHOD(CreateShipment_CheckFields)
         {
-            struct Shipment s = createShipment(200, 5.0, { 'B', 1 });
+            struct Shipment s = createShipment(200, 5.0, { 1, 'B'});
             Assert::AreEqual(200, s.weight);
             Assert::AreEqual(5.0, s.volume, 0.001);
             Assert::AreEqual('B', s.dest.col);
-            /*Assert::AreEqual(1, s.dest.row);*/
+            Assert::AreEqual(1, (int)s.dest.row);
         }
 
         TEST_METHOD(LoadPackage_UpdatesTruck)
@@ -150,7 +150,7 @@ namespace TestProject
             truck.currentVolume = 0.0;
             truck.route = getBlueRoute();
 
-            struct Shipment s = createShipment(1000, 2.0, { 'A', 0 });
+            struct Shipment s = createShipment(1000, 2.0, { 1, 'A'});
 
             loadPackage(&truck, &s);
 
