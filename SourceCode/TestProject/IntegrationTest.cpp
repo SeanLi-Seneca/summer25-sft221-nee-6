@@ -62,7 +62,15 @@ namespace IntegrationTest
 		}
 	}
 
-    TEST_CLASS(LimitingFactor)
+	TEST_CLASS(IT_01_Weight)
+	{
+	};
+
+	TEST_CLASS(IT_02_Volume)
+	{
+	};
+
+    TEST_CLASS(IT_03_LimitingFactor)
     {
     public:
         TEST_METHOD(Overweight)
@@ -102,4 +110,8 @@ namespace IntegrationTest
 			Assert::AreEqual(0, truckIndex);
 		}
     };
+
+	TEST_CLASS(IT_04_ShortestDiversion)
+	{
+	};
 }
