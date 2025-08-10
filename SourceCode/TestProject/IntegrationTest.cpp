@@ -64,10 +64,40 @@ namespace IntegrationTest
 
 	TEST_CLASS(IT_01_Weight)
 	{
+        public:
+    TEST_METHOD(AllEmpty_Trucks_BlueChosen)
+    {
+        initializeData();
+        processUserInput("1000 5 3B"); // Weight=1000kg, 5 units volume
+        Assert::AreEqual(std::string("Blue"), std::string(truckFleet[truckIndex].name));
+    }
+
+    TEST_METHOD(OverWeight_ChooseYellow)
+    {
+        initializeData();
+        truckFleet[0].currentWeight = 2000; // Blue already overweight
+        processUserInput("500 3 3B");
+        Assert::AreEqual(std::string("Yellow"), std::string(truckFleet[truckIndex].name));
+    }
 	};
 
 	TEST_CLASS(IT_02_Volume)
 	{
+        public:
+    TEST_METHOD(VolumeCheck_ChooseBlue)
+    {
+        initializeData();
+        processUserInput("200 2 3B"); // Volume ok
+        Assert::AreEqual(std::string("Blue"), std::string(truckFleet[truckIndex].name));
+    }
+
+    TEST_METHOD(OverVolume_ChooseYellow)
+    {
+        initializeData();
+        truckFleet[0].currentVolume = 9; // Near max volume for blue truck
+        processUserInput("200 3 3B");
+        Assert::AreEqual(std::string("Yellow"), std::string(truckFleet[truckIndex].name));
+    }
 	};
 
     TEST_CLASS(IT_03_LimitingFactor)
@@ -113,5 +143,21 @@ namespace IntegrationTest
 
 	TEST_CLASS(IT_04_ShortestDiversion)
 	{
+        public:
+    TEST_METHOD(ShortestRoute_Blue)
+    {
+        initializeData();
+        processUserInput("500 3 3B");
+        Assert::AreEqual(std::string("Blue"), std::string(truckFleet[truckIndex].name));
+    }
+
+    TEST_METHOD(DiversionNeeded_ChooseYellow)
+    {
+        initializeData();
+        truckFleet[0].distanceFromCustomer = 50; // Force diversion scenario (Blue far away)
+        truckFleet[2].distanceFromCustomer = 20; // Yellow closer
+        processUserInput("500 3 3B");
+        Assert:
 	};
+}
 }
